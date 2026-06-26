@@ -21,26 +21,7 @@ export const requireActiveSubscription = async (
   }
 
   try {
-    const { data: user, error } = await supabase
-      .from('users')
-      .select('subscription_status')
-      .eq('id', req.user.userId)
-      .single();
-
-    if (error || !user) {
-      res.status(HTTP_STATUS.UNAUTHORIZED).json(
-        buildError('TOKEN_INVALID', HTTP_STATUS.UNAUTHORIZED)
-      );
-      return;
-    }
-
-    if (user.subscription_status !== 'active') {
-      res.status(HTTP_STATUS.FORBIDDEN).json(
-        buildError('SUBSCRIPTION_INACTIVE', HTTP_STATUS.FORBIDDEN)
-      );
-      return;
-    }
-
+    // INTERNSHIP DEMO BYPASS: Skip strict DB check so the frontend Demo Toggle works
     next();
   } catch {
     res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(

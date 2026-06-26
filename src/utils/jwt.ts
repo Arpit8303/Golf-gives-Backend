@@ -13,12 +13,12 @@ const REFRESH_EXPIRES = process.env.JWT_REFRESH_EXPIRES_IN ?? '7d';
 
 /** Generate a short-lived access token (15 minutes) */
 export const generateAccessToken = (payload: JwtPayload): string => {
-  return jwt.sign(payload, ACCESS_SECRET, { expiresIn: ACCESS_EXPIRES });
+  return jwt.sign(payload, ACCESS_SECRET, { expiresIn: ACCESS_EXPIRES as any });
 };
 
 /** Generate a long-lived refresh token (7 days) */
 export const generateRefreshToken = (payload: JwtPayload): string => {
-  return jwt.sign(payload, REFRESH_SECRET, { expiresIn: REFRESH_EXPIRES });
+  return jwt.sign(payload, REFRESH_SECRET, { expiresIn: REFRESH_EXPIRES as any });
 };
 
 /** Verify and decode an access token */

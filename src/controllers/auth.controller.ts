@@ -44,7 +44,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
     const { data: newUser, error } = await supabase
       .from('users')
-      .insert({ full_name, email, password_hash, role: 'subscriber', subscription_status: 'inactive' })
+      .insert({ full_name, email, password_hash, role: 'subscriber', subscription_status: 'active' })
       .select('id, full_name, email, role, subscription_status, charity_percentage, created_at')
       .single();
 
